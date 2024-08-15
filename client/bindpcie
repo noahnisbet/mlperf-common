@@ -104,10 +104,7 @@ readonly cores_per_gpu=$(( cores_per_node / gpus_per_node ))
 readonly local_node=$(( local_rank / gpus_per_node ))
 
 
-declare -a ibdevs=()
-if ibstat_out="$(ibv_devinfo --list | tail -n+2 | cut -f2 | grep -v '^$')"; then
-    mapfile -t ibdevs <<< "${ibstat_out}"
-fi
+declare -a ibdevs=("mlx5_0" "mlx5_3" "mlx5_4" "mlx5_5" "mlx5_6" "mlx5_9" "mlx5_10" "mlx5_11")
 readonly num_ibdevs="${#ibdevs[@]}"
 
 ################################################################################
